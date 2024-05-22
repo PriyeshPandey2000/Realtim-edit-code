@@ -70,7 +70,7 @@ function EditorPage() {
       socketRef.current.off(ACTIONS.JOINED);
       socketRef.current.off(ACTIONS.DISCONNECTED);
     };
-  }, []);
+  }, [Location.state?.username, navigate, roomId]);
 
   if (!Location.state) {
     return <Navigate to="/" />;
