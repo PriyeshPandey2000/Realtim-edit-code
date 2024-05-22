@@ -19,7 +19,7 @@ app.use(helmet.contentSecurityPolicy({
     scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
     styleSrc: ["'self'", "'unsafe-inline'"],
     imgSrc: ["'self'", "data:"],
-    fontSrc: ["'self'"],
+    fontSrc: ["'self'","https://realtime-edit-code.onrender.com/css/fonts/"],
     connectSrc: ["'self'"],
   },
 }));
