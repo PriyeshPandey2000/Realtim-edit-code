@@ -4,6 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const ACTIONS = require("./Actions");
 const path=require("path");
+const helmet = require('helmet');
 
 
 
@@ -12,13 +13,22 @@ const path=require("path");
 const server = http.createServer(app);
 
 const io = new Server(server);
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+    styleSrc: ["'self'", "'unsafe-inline'"],
+    imgSrc: ["'self'", "data:"],
+    fontSrc: ["'self'"],
+    connectSrc: ["'self'"],
+  },
+}));
 
-const __dirname1=path.resolve();
-if(process.env.NODE_ENV==="production"){
-  app.use(express.static(path.join(__dirname1,"/client/build")));
-  app.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname1, "client", "build", "index.html"))
-  })
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
+  });
 }
 
 
