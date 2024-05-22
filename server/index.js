@@ -5,11 +5,9 @@ const { Server } = require("socket.io");
 const ACTIONS = require("./Actions");
 
 const server = http.createServer(app);
-app.use((req,res,next)=>{
-  res.sendFile(path.join(__dirname,'build','index.html'))
-})
+
 const io = new Server(server);
-app.use(express.static('build'));
+
 
 const userSocketMap = {};
 const getAllConnectedClients = (roomId) => {
